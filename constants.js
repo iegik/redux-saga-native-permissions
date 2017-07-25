@@ -1,0 +1,5 @@
+export const UNDETERMINED = 'undetermined';
+export const AUTHORIZED = 'authorized';
+
+export const PERMISSION_DETECTED = 'saga/permissions/PERMISSION_DETECTED';
+export const PERMISSION_ERROR = 'saga/permissions/PERMISSION_ERROR';
