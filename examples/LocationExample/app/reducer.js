@@ -4,7 +4,6 @@ import {
     COORDINATES,
     ADDRESS,
     CHANGE_CURRENT_LOCATION,
-    GEOLOCATION,
     GEOLOCATION_DETECTION,
     GEOLOCATION_ERROR,
 } from './constants';

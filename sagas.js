@@ -22,16 +22,24 @@ export function* getLocationPermission(){
     }
 }
 
+export function* getCameraPermission(){
+    try {
+        let response = yield call(() => Permissions.getPermissionStatus('camera', 'whenInUse'));
+        yield put(locationPermissionDetected('camera', response))
+    } catch (error) {
+        yield put(throwPermissionError(error));
+    }
+}
+
 export function* checkLocationPermission(state){
 }
 
 export function* openSettings(){
-    alert('Open settings!')
-    // try {
-    //     let response = yield call(() => Permissions.canOpenSettings() && Permissions.openSettings());
-    // } catch (error) {
-    //     console.log(error)
-    // }
+    try {
+        let response = yield call(() => Permissions.canOpenSettings() && Permissions.openSettings());
+    } catch (error) {
+        alert('Open settings!')
+    }
 }
 
 export default function* (){
