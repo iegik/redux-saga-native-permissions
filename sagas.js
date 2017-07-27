@@ -9,14 +9,14 @@ import {
 } from './constants';
 
 import {
-    locationPermissionDetected,
+    permissionDetected,
     throwPermissionError,
 } from './actions';
 
 export function* getLocationPermission(){
     try {
         let response = yield call(() => Permissions.getPermissionStatus('location', 'whenInUse'));
-        yield put(locationPermissionDetected('location', response))
+        yield put(permissionDetected('location', response))
     } catch (error) {
         yield put(throwPermissionError(error));
     }
@@ -25,7 +25,7 @@ export function* getLocationPermission(){
 export function* getCameraPermission(){
     try {
         let response = yield call(() => Permissions.getPermissionStatus('camera', 'whenInUse'));
-        yield put(locationPermissionDetected('camera', response))
+        yield put(permissionDetected('camera', response))
     } catch (error) {
         yield put(throwPermissionError(error));
     }

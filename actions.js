@@ -3,7 +3,7 @@ import {
     PERMISSION_ERROR,
 } from './constants'
 
-export function locationPermissionDetected(permission, status) {
+export function permissionDetected(permission, status) {
     return { type: PERMISSION_DETECTED, permission, status }
 }
 
