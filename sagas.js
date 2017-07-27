@@ -15,7 +15,7 @@ import {
 
 export function* getLocationPermission(){
     try {
-        let response = yield call(() => Permissions.getPermissionStatus('location', 'whenInUse'));
+        let response = yield call(() => Permissions.check('location', 'whenInUse'));
         yield put(permissionDetected('location', response))
     } catch (error) {
         yield put(throwPermissionError(error));
@@ -24,7 +24,7 @@ export function* getLocationPermission(){
 
 export function* getCameraPermission(){
     try {
-        let response = yield call(() => Permissions.getPermissionStatus('camera', 'whenInUse'));
+        let response = yield call(() => Permissions.check('camera', 'whenInUse'));
         yield put(permissionDetected('camera', response))
     } catch (error) {
         yield put(throwPermissionError(error));
@@ -34,14 +34,16 @@ export function* getCameraPermission(){
 export function* checkLocationPermission(state){
 }
 
-export function* openSettings(){
-    try {
-        let response = yield call(() => Permissions.canOpenSettings() && Permissions.openSettings());
-    } catch (error) {
-        alert('Open settings!')
-    }
-}
+// export function* openSettings(){
+//     try {
+//         let response = yield call(() => Permissions.canOpenSettings() && Permissions.openSettings());
+//         console.log({response})
+//     } catch (error) {
+//         console.log(error)
+//         alert('Open settings!')
+//     }
+// }
 
 export default function* (){
-    yield takeLatest(PERMISSION_ERROR, openSettings);
+    // yield takeLatest(PERMISSION_ERROR, openSettings);
 }
