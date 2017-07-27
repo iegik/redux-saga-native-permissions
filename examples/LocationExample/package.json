@@ -1,18 +1,29 @@
 {
 	"name": "LocationExample",
 	"version": "0.0.1",
-	"private": true,
+	"description": "",
+	"main": "index.js",
 	"scripts": {
 		"start": "node node_modules/react-native/local-cli/cli.js start",
 		"test": "jest"
 	},
+	"author": "",
+	"license": "ISC",
 	"dependencies": {
+		"immutable": "^3.8.1",
 		"react": "16.0.0-alpha.12",
-		"react-native": "0.46.4"
+		"react-native": "0.46.4",
+		"react-native-maps": "^0.15.2",
+		"react-native-permissions": "0.2.7",
+		"react-redux": "^5.0.5",
+		"redux": "^3.7.2",
+		"redux-immutable": "4.0.0",
+		"redux-saga": "^0.15.6",
+		"redux-saga-native-permissions": "../../"
 	},
 	"devDependencies": {
 		"babel-jest": "20.0.3",
-		"babel-preset-react-native": "2.1.0",
+		"babel-preset-react-native": "2.0.0",
 		"jest": "20.0.4",
 		"react-test-renderer": "16.0.0-alpha.12"
 	},

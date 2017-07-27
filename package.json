@@ -1,0 +1,33 @@
+{
+  "name": "redux-saga-native-permissions",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "react-native-permissions": "^1.0.0",
+    "redux-saga": "^0.15.6"
+  },
+  "devDependencies": {
+    "babel-jest": "20.0.3",
+    "babel-preset-react-native": "2.0.0",
+    "jest": "20.0.4"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iegik/redux-saga-native-permissions.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iegik/redux-saga-native-permissions/issues"
+  },
+  "homepage": "https://github.com/iegik/redux-saga-native-permissions#readme",
+  "files": [
+    "actions.js",
+    "constants.js",
+    "sagas.js"
+  ]
+}

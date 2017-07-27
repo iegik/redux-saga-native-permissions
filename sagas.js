@@ -26,11 +26,12 @@ export function* checkLocationPermission(state){
 }
 
 export function* openSettings(){
-    try {
-        let response = yield call(() => Permissions.canOpenSettings() && Permissions.openSettings());
-    } catch (error) {
-        console.log(error)
-    }
+    alert('Open settings!')
+    // try {
+    //     let response = yield call(() => Permissions.canOpenSettings() && Permissions.openSettings());
+    // } catch (error) {
+    //     console.log(error)
+    // }
 }
 
 export default function* (){
