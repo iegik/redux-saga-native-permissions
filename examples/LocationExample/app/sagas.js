@@ -23,6 +23,10 @@ import {
     getLocationPermission,
 } from 'redux-saga-native-permissions/sagas';
 
+import {
+    requestPermission,
+} from 'redux-saga-native-permissions/actions';
+
 export function* processGeolocation() {
     try {
         let position = yield call(() => new Promise((resolve, reject) => navigator.geolocation.getCurrentPosition(resolve, reject,{
@@ -42,7 +46,7 @@ export function* processGeolocation() {
 export function* checkGeolocationPermission({permission, status}) {
     if (permission === 'location') {
         if (status === UNDETERMINED) {
-            yield put(getCurrentLocation());
+            yield put(requestPermission({permission}));
         } else if (status === AUTHORIZED) {
             yield put(getCurrentLocation());
         } else {
