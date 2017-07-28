@@ -27,7 +27,8 @@ import {
     requestPermission,
 } from 'redux-saga-native-permissions/actions';
 
-export function* processGeolocation() {
+export function* processGeolocation({permission}) {
+    if (permission !== 'location') return;
     try {
         let position = yield call(() => new Promise((resolve, reject) => navigator.geolocation.getCurrentPosition(resolve, reject,{
             enableHighAccuracy: false,
@@ -43,20 +44,7 @@ export function* processGeolocation() {
     }
 }
 
-export function* checkGeolocationPermission({permission, status}) {
-    if (permission === 'location') {
-        if (status === UNDETERMINED) {
-            yield put(requestPermission({permission}));
-        } else if (status === AUTHORIZED) {
-            yield put(getCurrentLocation());
-        } else {
-            yield put(throwLocationPermissionError(`Permission error: ${status}`));
-        }
-    }
-}
-
 export default function* (){
-    yield takeLatest(GEOLOCATION_DETECTION, processGeolocation);
-    yield takeLatest(PERMISSION_DETECTED, checkGeolocationPermission);
+    yield takeLatest(PERMISSION_DETECTED, processGeolocation);
     yield takeLatest(GEOLOCATION, getLocationPermission);
 }

@@ -5,6 +5,10 @@ import { call, put, takeEvery, takeLatest } from 'redux-saga/effects'
 import Permissions from 'react-native-permissions';
 
 import {
+    UNDETERMINED,
+    AUTHORIZED,
+
+    PERMISSION_DETECTED,
     PERMISSION_UNDETERMINED,
     PERMISSION_ERROR,
 } from './constants';
@@ -33,6 +37,17 @@ export function* requestPermission({permission}){
     }
 }
 
+export function* checkPermission({permission, status}){
+    switch (status) {
+        case UNDETERMINED:
+            yield put(permissionUndetermined(permission, error));
+        case AUTHORIZED:
+            yield put(permissionDetected(permission));
+        default:
+            yield put(throwPermissionError(`Cannot detect ${permission}: ${status}`));
+    }
+}
+
 export function* getCameraPermission(){
     try {
         let response = yield call(() => Permissions.check('camera', 'whenInUse'));
@@ -44,7 +59,10 @@ export function* getCameraPermission(){
 
 export function* openSettings(){
     try {
-        let response = yield call(() => Permissions.canOpenSettings && Permissions.canOpenSettings() && Permissions.openSettings && Permissions.openSettings());
+        let response = yield call(() => {
+            return Permissions.canOpenSettings && Permissions.canOpenSettings()
+                && Permissions.openSettings && Permissions.openSettings()
+        });
     } catch (error) {
         // console.log(error)
         // alert('Open settings!')
@@ -54,4 +72,5 @@ export function* openSettings(){
 export default function* (){
     yield takeLatest(PERMISSION_ERROR, openSettings);
     yield takeLatest(PERMISSION_UNDETERMINED, requestPermission);
+    yield takeLatest(PERMISSION_DETECTED, checkPermission);
 }
