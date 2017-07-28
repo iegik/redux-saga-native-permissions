@@ -7,8 +7,9 @@ import {
     GEOLOCATION,
 } from './constants';
 import {
-    PERMISSION_DETECTED,
+    PERMISSION_AUTHORIZED,
     PERMISSION_ERROR,
+    PERMISSION_DENIED,
 } from 'redux-saga-native-permissions/constants';
 import {
     getLocationPermission,
@@ -42,7 +43,8 @@ export function* processPermissionError({permission, error}) {
 }
 
 export default function* (){
-    yield takeLatest(PERMISSION_DETECTED, processGeolocation);
+    yield takeLatest(PERMISSION_AUTHORIZED, processGeolocation);
+    yield takeLatest(PERMISSION_DENIED, processPermissionError);
     yield takeLatest(PERMISSION_ERROR, processPermissionError);
     yield takeLatest(GEOLOCATION, getLocationPermission);
 }

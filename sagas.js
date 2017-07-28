@@ -7,6 +7,7 @@ import Permissions from 'react-native-permissions';
 import {
     UNDETERMINED,
     AUTHORIZED,
+    DENIED,
 
     PERMISSION_DETECTED,
     PERMISSION_UNDETERMINED,
@@ -16,6 +17,8 @@ import {
 import {
     permissionDetected,
     permissionUndetermined,
+    permissionDenied,
+    permissionAuthorized,
     throwPermissionError,
 } from './actions';
 
@@ -42,7 +45,9 @@ export function* checkPermission({permission, status}){
         case UNDETERMINED:
             yield put(permissionUndetermined(permission));
         case AUTHORIZED:
-            yield put(permissionDetected(permission));
+            yield put(permissionAuthorized(permission));
+        case DENIED:
+            yield put(permissionDenied(permission));
         default:
             yield put(throwPermissionError(`Cannot detect ${permission}: ${status}`));
     }

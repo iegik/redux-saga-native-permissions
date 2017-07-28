@@ -29,7 +29,7 @@ export default (state = fromJS(initialState), action = {}) => {
                 .set('isPositionRequested', true)
                 ;
         case GEOLOCATION_ERROR:
-            alert(action.error.message);
+            alert(action.error);
             return state
                 .set('hasGeolocation', false)
                 ;
