@@ -41,16 +41,14 @@ export function* requestPermission({permission}){
 }
 
 export function* checkPermission({permission, status}){
-    switch (status) {
-        case UNDETERMINED:
-            yield put(permissionUndetermined(permission));
-            break;
-        case AUTHORIZED:
-            yield put(permissionAuthorized(permission));
-            break;
-        case DENIED:
-            yield put(permissionDenied(permission));
-            break;
+    if (status === UNDETERMINED) {
+        yield put(permissionUndetermined(permission));
+    }
+    if (status === AUTHORIZED) {
+        yield put(permissionAuthorized(permission));
+    }
+    if (status === DENIED) {
+        yield put(permissionDenied(permission));
     }
 }
 
