@@ -49,7 +49,7 @@ export function* checkPermission({permission, status}){
         case DENIED:
             yield put(permissionDenied(permission));
         default:
-            yield put(throwPermissionError(`Cannot detect ${permission}: ${status}`));
+            yield put(throwPermissionError(new Error(`Cannot access ${permission} permission ${status}`)));
     }
 }
 
