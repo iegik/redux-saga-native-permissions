@@ -1,7 +1,7 @@
 /*
  * https://github.com/redux-saga/redux-saga
  */
-import { call, put, takeEvery, takeLatest } from 'redux-saga/effects'
+import { call, put, takeLatest } from 'redux-saga/effects'
 import Permissions from 'react-native-permissions';
 
 import {
@@ -40,7 +40,7 @@ export function* requestPermission({permission}){
 export function* checkPermission({permission, status}){
     switch (status) {
         case UNDETERMINED:
-            yield put(permissionUndetermined(permission, error));
+            yield put(permissionUndetermined(permission));
         case AUTHORIZED:
             yield put(permissionDetected(permission));
         default:

@@ -1,8 +1,5 @@
 import { fromJS } from 'immutable';
 import {
-    LOCATION,
-    COORDINATES,
-    ADDRESS,
     CHANGE_CURRENT_LOCATION,
     GEOLOCATION_DETECTION,
     GEOLOCATION_ERROR,
@@ -11,7 +8,8 @@ import {
     PERMISSION_DETECTED,
 } from 'redux-saga-native-permissions/constants';
 
-const initialState = {}; // FIXME: {}
+const initialState = {};
+
 /**
  * Merges location changes into the global application immutable state.
  * @param state

@@ -5,27 +5,20 @@ import { call, put, takeLatest } from 'redux-saga/effects'
 
 import {
     GEOLOCATION,
-    GEOLOCATION_DETECTION,
 } from './constants';
 import {
-    UNDETERMINED,
-    AUTHORIZED,
     PERMISSION_DETECTED,
+    PERMISSION_ERROR,
 } from 'redux-saga-native-permissions/constants';
-
-import {
-    getCurrentLocation,
-    changeCurrentLocation,
-    throwLocationPermissionError,
-    throwLocationDetectionError,
-} from './actions';
 import {
     getLocationPermission,
 } from 'redux-saga-native-permissions/sagas';
 
 import {
-    requestPermission,
-} from 'redux-saga-native-permissions/actions';
+    changeCurrentLocation,
+    throwLocationDetectionError,
+    throwLocationPermissionError,
+} from './actions';
 
 export function* processGeolocation({permission}) {
     if (permission !== 'location') return;
@@ -43,8 +36,13 @@ export function* processGeolocation({permission}) {
         yield put(throwLocationDetectionError(e));
     }
 }
+export function* processPermissionError({permission, error}) {
+    if (permission !== 'location') return;
+    yield put(throwLocationPermissionError(error));
+}
 
 export default function* (){
     yield takeLatest(PERMISSION_DETECTED, processGeolocation);
+    yield takeLatest(PERMISSION_ERROR, processPermissionError);
     yield takeLatest(GEOLOCATION, getLocationPermission);
 }
