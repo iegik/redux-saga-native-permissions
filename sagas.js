@@ -43,13 +43,14 @@ export function* requestPermission({permission}){
 export function* checkPermission({permission, status}){
     switch (status) {
         case UNDETERMINED:
-            return put(permissionUndetermined(permission));
+            yield put(permissionUndetermined(permission));
+            break;
         case AUTHORIZED:
-            return put(permissionAuthorized(permission));
+            yield put(permissionAuthorized(permission));
+            break;
         case DENIED:
-            return put(permissionDenied(permission));
-        default:
-            return put(throwPermissionError(new Error(`Cannot access ${permission} permission ${status}`)));
+            yield put(permissionDenied(permission));
+            break;
     }
 }
 
