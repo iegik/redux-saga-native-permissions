@@ -14,6 +14,7 @@ import {
     
     PERMISSION_DETECTED,
     PERMISSION_UNDETERMINED,
+    PERMISSION_DENIED,
     PERMISSION_ERROR,
 } from './constants';
 
@@ -78,6 +79,7 @@ export function* openSettings(){
 
 export default function* (){
     yield takeLatest(PERMISSION_ERROR, openSettings);
+    yield takeLatest(PERMISSION_DENIED, openSettings);
     yield takeLatest(PERMISSION_UNDETERMINED, requestPermission);
     yield takeLatest(PERMISSION_DETECTED, checkPermission);
 }
