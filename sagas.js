@@ -72,7 +72,7 @@ export function* openSettings(){
                 && Permissions.openSettings && Permissions.openSettings()
         });
     } catch (error) {
-        // console.log(error)
+        console.log(error)
         // alert('Open settings!')
     }
 }
