@@ -9,6 +9,9 @@ import {
     AUTHORIZED,
     DENIED,
 
+    PERMISSION_TYPE_CAMERA,
+    PERMISSION_TYPE_LOCATION,
+    
     PERMISSION_DETECTED,
     PERMISSION_UNDETERMINED,
     PERMISSION_ERROR,
@@ -24,10 +27,10 @@ import {
 
 export function* getLocationPermission(){
     try {
-        let response = yield call(() => Permissions.check('location', 'whenInUse'));
-        yield put(permissionDetected('location', response))
+        let response = yield call(() => Permissions.check(PERMISSION_TYPE_LOCATION, 'whenInUse'));
+        yield put(permissionDetected(PERMISSION_TYPE_LOCATION, response))
     } catch (error) {
-        yield put(permissionUndetermined('location', error));
+        yield put(permissionUndetermined(PERMISSION_TYPE_LOCATION, error));
     }
 }
 
@@ -54,10 +57,10 @@ export function* checkPermission({permission, status}){
 
 export function* getCameraPermission(){
     try {
-        let response = yield call(() => Permissions.check('camera', 'whenInUse'));
-        yield put(permissionDetected('camera', response))
+        let response = yield call(() => Permissions.check(PERMISSION_TYPE_CAMERA, 'whenInUse'));
+        yield put(permissionDetected(PERMISSION_TYPE_CAMERA, response))
     } catch (error) {
-        yield put(permissionUndetermined('camera', error));
+        yield put(permissionUndetermined(PERMISSION_TYPE_CAMERA, error));
     }
 }
 
